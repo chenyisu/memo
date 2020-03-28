@@ -1,0 +1,145 @@
+﻿@model memoDemo.Models.ViewModel.MemoViewModel
+
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <title>新增memo</title>
+
+    <style>
+
+        body {
+            background-color: rgb(233, 233, 233);
+        }
+
+        /* header */
+        #header {
+            opacity: 0.8;
+            background-color: black;
+            height: 12vh;
+        }
+
+        #title {
+            font-size: 32px
+        }
+
+        #submenu {
+            background-color: black;
+        }
+
+
+        .divH {
+            height: 10vh;
+        }
+
+        /* new */
+        /* register */
+        #newbook {
+            /* border: 5px solid white; */
+            height: 100%;
+            background-color: azure;
+            opacity: 0.8;
+            border-radius: 10px;
+            box-shadow: 4px 4px 4px #333;
+        }
+
+        #newbook-btn {
+            height: 40px;
+            width: 200px;
+            font-size: 20px;
+            position: relative;
+            left: 35%;
+            border-radius: 10px;
+            box-shadow: 4px 4px 4px #333;
+        }
+
+        input {
+            width: 70%;
+        }
+
+        textarea {
+            padding: 0;
+            width: 100%;
+            box-sizing: border-box;
+            height: 150px;
+            border: 1px solid black;
+            background: white;
+            overflow: auto;
+        }
+
+    </style>
+    <script>
+        $(document).ready(function () {
+            console.log("Jquery ready!");
+        });
+    </script>
+
+</head>
+
+<body>
+
+
+    <!-- 新增memo -->
+    <div class="row mx-0">
+        <div class="col-8 offset-2 mt-5 font-weight-bold" id="newbook">
+            <h2 style="text-align: center" class="pt-5">新增 MEMO</h2>
+
+            <form action="@Url.Action("addMemo")" method="post" enctype="multipart/form-data">
+                <hr>
+                <div class="form-group px-3 mx-5 pt-3 text-right">
+                    <input id="today" class="form-control-label text-right" style="border-style:none;background-color:azure" disabled />
+                </div>
+
+                <div class="form-group px-3 mx-5 pt-3">
+                    <label for="title" class="form-control-label">標題： </label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+
+                <div class="form-group px-3 mx-5 pt-3">
+                    <label for="content" class="form-control-label">內容：</label>
+                    <textarea name="content" id="content" cols="100" rows="10"></textarea>
+                    @Html.ValidationMessageFor(model => model.content, "", new { @class = "text-danger" })
+                </div>
+                <div class="text-center">
+                    <button type="submit">儲存</button>
+                </div>
+                <div class="divH"></div>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        let Today = new Date();
+        $('#today').val(Today.getFullYear()+ " 年 " + (Today.getMonth()+1) + " 月 " + Today.getDate() + " 日");
+    </script>
+
+
+</body>
+
+</html>

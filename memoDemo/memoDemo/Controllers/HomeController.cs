@@ -35,7 +35,7 @@ namespace memoDemo.Controllers
             if (user != null)
             {
                 Session["auth"] = user.account;
-                return RedirectToAction("memo");
+                return RedirectToAction("Index","Memo"); //導向memo頁面
             }
             logon.result = new Resp()
             {

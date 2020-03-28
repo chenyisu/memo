@@ -1,0 +1,217 @@
+﻿@{//新增memo是否成功
+    if (TempData["msg"] != null)
+    {
+        <script>
+            alert("成功儲存");
+
+        </script>
+    }
+}
+
+
+@*<div class="text-right">
+        <button onclick="location.href='@Url.Action("New", "NewMemo")'">新增</button>
+    </div>*@
+
+
+@{
+    Layout = null;
+}
+@model List<memoDemo.Models.memo>
+
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <title>MEMO</title>
+
+
+    <style>
+        body {
+            background-color: rgb(233, 233, 233);
+        }
+        /* banner */
+        #banner {
+            height: 18vh;
+            background-image: url('images/banner.jpg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* header */
+        #header {
+            opacity: 0.8;
+            background-color: black;
+            height: 100px;
+        }
+
+        #title {
+            font-size: 32px
+        }
+
+        #submenu {
+            background-color: black;
+        }
+
+        .divH {
+            height: 15vh;
+        }
+
+        #row {
+            margin-top: -300px;
+        }
+
+        /* 查詢*/
+        #search {
+            margin-top: -30px;
+            background-color: rgb(214, 214, 214);
+            height: 90px;
+            border-radius: 10px;
+            opacity: 0.9;
+            box-shadow: 3px 3px 3px #333;
+        }
+
+        #search-btn {
+            width: 160px;
+            height: 45px;
+            font-size: 16px;
+            border-radius: 20px;
+            background-color: rgba(12, 55, 134, 0.9);
+            color: white;
+            box-shadow: 3px 3px 3px #333;
+        }
+
+        #rank {
+            /* margin-top: -160px; */
+            /* background-color: rgb(214, 214, 214); */
+            height: 390px;
+            border: 1px solid black;
+            border-radius: 10px;
+            opacity: 0.9;
+            /* box-shadow: 3px 3px 3px #333; */
+        }
+
+        .slick-prev {
+            left: -50px;
+        }
+
+            .slick-prev:before, .slick-next:before {
+                font-size: 50px;
+                color: #8d0404;
+            }
+    </style>
+</head>
+<body>
+    <div class="row divH mx-0"></div>
+
+    @*<div class="row my-5 mx-0">
+             館藏查詢
+            <div class="col-1"></div>
+            <form class="form-inline col-12" action="SearchResult" method="post">
+                <div class="col-1"></div>
+                <div class="form-group col-3 ">
+                    <select name="key" id="" class="form-control w-100">
+                        <option value="name">書名</option>
+                        <option value="author">作者</option>
+                        <option value="publisher">出版社</option>
+                        <option value="category">分類</option>
+                    </select>
+                </div>
+                <div class="form-group col-4">
+                    <input type="text" class="form-control w-100" placeholder="請輸入關鍵字" name="searchstring" required>
+                </div>
+                <div class=" form-group col-3 ml-3">
+                    <input type="submit" class="btn btn-lg" id="search-btn" value="尋找書籍">
+                </div>
+                <p class="offset-4">@Html.ValidationMessageFor(model => model.searchstring, "", new { @class = "text-danger ml-4" })</p>
+
+            </form>
+        </div>*@
+
+
+    <div class="col-11 mx-5 mb-5 mt-0" id="resultList">
+
+        @{
+            if (Model != null)
+            {
+                <hr />
+                foreach (var item in Model)
+                {
+                    <table class="mt-3 p-5" style="width:90%; margin:auto; line-height:26px">
+                        <tr class="mt-5 p-3">
+                            <td style="width:70%">
+                                <div class="col-12">
+                                    <h3 class="text-danger">@item.title</h3>
+                                    <label class="text-danger float-right">@item.create_date</label>
+                                </div>
+
+                                @if (item.memo_content.Length > 20)
+                                {
+                                    <div>
+                                        <p>@item.memo_content.Substring(0, 20)</p>
+                                        <label>繼續閱讀..</label>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div>
+                                        <label>@item.memo_content</label>
+                                    </div>
+                                }
+
+                            </td>
+                            <td style="width:30%">
+                                @Html.ActionLink("編輯", "editMemo" ,item);
+                                @Html.ActionLink("刪除", "deleteMemo", new { id = item.memo_id });
+                            </td>
+                        </tr>
+                    </table>
+                    <hr />
+                }
+            }
+        }
+    </div>
+
+</body>
+</html>
+
+@*<script>
+    function editmemo(id) {
+        $.ajax({
+            url: "/Memo/editMemo",
+            type: "POST",
+            data: id,
+            success: function (resp) {
+
+            }
+        });
+
+    function deletememo(id) {
+
+    }
+</script>*@
