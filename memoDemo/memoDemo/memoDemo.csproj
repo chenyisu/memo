@@ -97,21 +97,47 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="images\banner.jpg" />
+    <Content Include="images\register.jpg" />
     <Content Include="Models\memoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
+    </Content>
+    <Content Include="Models\memoModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>memoModel1.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\memo.cs">
+      <DependentUpon>memoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\memoModel.Context.cs" />
+    <Compile Include="Models\memoModel.cs" />
     <Compile Include="Models\memoModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>memoModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\memoModel1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>memoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetaData\userViewModel.cs" />
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>memoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user.cs">
+      <DependentUpon>memoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModel\UserViewModel.cs" />
+    <Compile Include="my_application\Resp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +150,7 @@
       <DependentUpon>memoModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -133,7 +160,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
