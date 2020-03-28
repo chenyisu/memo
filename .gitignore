@@ -1,5 +1,8 @@
 memoDemo/.vs/memoDemo/v16/Server/sqlite3/storage.ide
+memoDemo/memoDemo/obj/Debug/
+memoDemo/memoDemo/bin/
+memoDemo/.vs/memoDemo/v16/.suo
 memoDemo/.vs/memoDemo/v16/Server/sqlite3/storage.ide-shm
 memoDemo/.vs/memoDemo/v16/Server/sqlite3/storage.ide-wal
-memoDemo/memoDemo/bin/
-memoDemo/memoDemo/obj/Debug/
+
+
