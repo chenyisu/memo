@@ -7,3 +7,8 @@ memoDemo/.vs/memoDemo/v16/Server/sqlite3/storage.ide-wal
 
 
 memoDemo/memoDemo/memoDemo.csproj.user
+memoApi/.vs/memoApi/v16/.suo
+memoApi/.vs/memoApi/v16/Server/sqlite3/storage.ide
+memoApi/memoApi/memoApi.csproj.user
+memoApi/memoApi/bin/
+memoApi/memoApi/obj/Debug/
