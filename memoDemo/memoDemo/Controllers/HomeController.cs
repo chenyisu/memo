@@ -1,9 +1,8 @@
-﻿using memoDemo.Models;
-using memoDemo.Models.ViewModel;
+﻿using memoDemo.Models.ViewModel;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Net.Http;
+using System.Text;
 using System.Web.Mvc;
 
 namespace memoDemo.Controllers
@@ -13,7 +12,7 @@ namespace memoDemo.Controllers
     /// </summary>
     public class HomeController : Controller
     {
-        memoEntities db = new memoEntities();
+        public static readonly Uri _baseAddress = new Uri("http://localhost:9564/api/user");
 
         //登入頁面
         public ActionResult Index()
@@ -30,19 +29,27 @@ namespace memoDemo.Controllers
             if (!ModelState.IsValid)
             {return View("Index",logon);}
 
-            //Resp resp = new Resp();
-            user user = db.user.Where(x => x.account == logon.account).FirstOrDefault();
-            if (user != null)
+            string userToString = JsonConvert.SerializeObject(logon);
+            using(var httpClient = new HttpClient())
             {
-                Session["auth"] = user.account;
-                return RedirectToAction("Index","Memo"); //導向memo頁面
+                // post
+                var postTask = httpClient.PostAsync(_baseAddress, new StringContent(userToString, Encoding.UTF8, "application/json"));
+                postTask.Wait();
+                if (postTask.Result.IsSuccessStatusCode)
+                {
+                    Session["auth"] = logon.account;
+                    return RedirectToAction("Index", "Memo"); //導向memo頁面
+                }
+                else
+                {
+                    logon.result = new Resp()
+                    {
+                        errCode = "9999",
+                        resultMsg = "登入失敗"
+                    };
+                    return View("Index", logon);
+                }
             }
-            logon.result = new Resp()
-            {
-                errCode = "9999",
-                resultMsg = "登入失敗"
-            };
-            return View("Index",logon);
         }
     }
 }
