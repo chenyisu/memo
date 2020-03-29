@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace memoApi.Controllers
 {
-    public class memoController : ApiController
+    public class MemoController : ApiController
     {
         memoEntities db = new memoEntities();
 
@@ -34,11 +34,16 @@ namespace memoApi.Controllers
         // POST: api/memo
         public void Post(MemoViewModel editMemo)
         {
-            //var toEditMemo = db.memo.Where(m => m.memo_id == editMemo.memo_id).FirstOrDefault();
-            //toEditMemo.memo_content = editMemo.memo_content;
-            //toEditMemo.title = editMemo.title;
-            //toEditMemo.update_date = DateTime.Today;
-            //db.SaveChanges();
+            memo newMemo = new memo
+            {
+                create_date = DateTime.Today,
+                enable = 1,
+                title = editMemo.title,
+                memo_content = editMemo.memo_content,
+                update_date = DateTime.Today
+        };
+            db.memo.Add(newMemo);
+            db.SaveChanges();
         }
 
 
@@ -59,9 +64,11 @@ namespace memoApi.Controllers
         public void Delete(int id)
         {
             var theMemo = db.memo.Where(m => m.memo_id == id).FirstOrDefault();
-            
-            db.memo.Remove(theMemo);
-            db.SaveChanges();
+            if (theMemo != null)
+            {
+                db.memo.Remove(theMemo);
+                db.SaveChanges();
+            }
         }
     }
 }
