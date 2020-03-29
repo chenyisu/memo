@@ -17,7 +17,7 @@ namespace memoDemo.Models.ViewModel
 
             [Required(ErrorMessage = "內容請勿空白")]
             [Display(Name = "內容")]
-            public string content { get; set; }
+            public string memo_content { get; set; }
         }
     }
 }

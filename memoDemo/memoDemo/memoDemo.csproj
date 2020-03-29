@@ -158,6 +158,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Memo\Index.cshtml" />
     <Content Include="Views\NewMemo\New.cshtml" />
+    <Content Include="Views\Memo\EditMemo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

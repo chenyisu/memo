@@ -9,9 +9,11 @@ namespace memoDemo.Models.ViewModel
 {
     public partial class MemoViewModel
     {
+        public int memo_id { get; set; }
         public string title { get; set; }
 
-        public string content { get; set; }
+        public string memo_content { get; set; }
 
+        public string update_date { get; set; }
     }
 }

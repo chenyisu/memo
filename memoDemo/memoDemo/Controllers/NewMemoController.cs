@@ -15,7 +15,7 @@ namespace memoDemo.Controllers
         DateTime today = DateTime.Today;
 
 
-        // GET: NewMemo
+        // NewMemo
         public ActionResult New()
         {
             if (Session["auth"] != null)
@@ -38,7 +38,7 @@ namespace memoDemo.Controllers
             memo thisMemo = new memo()
             {
                 title = memo.title,
-                memo_content = memo.content,
+                memo_content = memo.memo_content,
                 update_date = today,
                 create_date = today,
                 enable=1
