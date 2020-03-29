@@ -9,9 +9,7 @@
 }
 
 
-@*<div class="text-right">
-        <button onclick="location.href='@Url.Action("New", "NewMemo")'">新增</button>
-    </div>*@
+
 
 
 @{
@@ -154,48 +152,50 @@
         </div>*@
 
 
-    <div class="col-11 mx-5 mb-5 mt-0" id="resultList">
-
-        @{
-            if (Model != null)
+<div class="col-11 mx-5 mb-5 mt-0" id="resultList">
+        <div class="text-right">
+            <button onclick="location.href='@Url.Action("New", "NewMemo")'">新增</button>
+        </div>
+    @{
+        if (Model != null)
+        {
+            <hr />
+            foreach (var item in Model)
             {
-                <hr />
-                foreach (var item in Model)
-                {
-                    <table class="mt-3 p-5" style="width:90%; margin:auto; line-height:26px">
-                        <tr class="mt-5 p-3">
-                            <td style="width:70%">
-                                <div class="col-12">
-                                    <h3 class="text-danger">@item.title</h3>
-                                    <label class="text-danger float-right">@item.create_date</label>
+                <table class="mt-3 p-5" style="width:90%; margin:auto; line-height:26px">
+                    <tr class="mt-5 p-3">
+                        <td style="width:70%">
+                            <div class="col-12">
+                                <h3 class="text-danger">@item.title</h3>
+                                <label class="text-danger float-right">@item.create_date</label>
+                            </div>
+
+                            @if (item.memo_content.Length > 20)
+                            {
+                                <div>
+                                    <p>@item.memo_content.Substring(0, 20)</p>
+                                    <a href="">繼續閱讀..</a>
                                 </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    <label>@item.memo_content</label>
+                                </div>
+                            }
 
-                                @if (item.memo_content.Length > 20)
-                                {
-                                    <div>
-                                        <p>@item.memo_content.Substring(0, 20)</p>
-                                        <label>繼續閱讀..</label>
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div>
-                                        <label>@item.memo_content</label>
-                                    </div>
-                                }
-
-                            </td>
-                            <td style="width:30%">
-                                @Html.ActionLink("編輯", "editMemo" ,item);
-                                @Html.ActionLink("刪除", "deleteMemo", new { id = item.memo_id });
-                            </td>
-                        </tr>
-                    </table>
-                    <hr />
-                }
+                        </td>
+                        <td style="width:30%">
+                            @Html.ActionLink("編輯", "editMemo", item)
+                            @Html.ActionLink("刪除", "deleteMemo", new { id = item.memo_id })
+                        </td>
+                    </tr>
+                </table>
+                <hr />
             }
         }
-    </div>
+    }
+</div>
 
 </body>
 </html>
