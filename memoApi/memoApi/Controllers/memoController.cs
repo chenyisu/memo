@@ -17,30 +17,24 @@ namespace memoApi.Controllers
         // GET: api/memo 列表
         public IHttpActionResult Get()
         {
+            //取得整張memo表
             var memoList = db.memo.OrderBy(m => m.memo_id).ToList();
             return Ok(memoList);
 
         }
-        //public string Get()
-        //{
-        //    Resp resp = new Resp();
-        //    var memoList = db.memo.OrderBy(m=>m.memo_id).ToList();
-        //    resp.isSuccessful = memoList != null ? true : false;
-        //    resp.resultMsg = JsonConvert.SerializeObject(memoList);
-        //    //return memoList;
-        //    return JsonConvert.SerializeObject(resp);
-        //}
 
         // GET: api/memo/5  該memo
-        public memo Get(int id)
+        public IHttpActionResult Get(int id)
         {
+            // 尋找該memo
             var theMemo = db.memo.Where(m => m.memo_id == id).FirstOrDefault();
-            return theMemo;
+            return Ok(theMemo);
         }
 
         // POST: api/memo
         public void Post([FromBody]string value)
         {
+
         }
 
 

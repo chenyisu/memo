@@ -123,18 +123,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\memo.cs">
-      <DependentUpon>MemoModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\memo.cs" />
     <Compile Include="Models\MemoModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MemoModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MemoModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MemoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MemoModel.Designer.cs">
       <AutoGen>True</AutoGen>

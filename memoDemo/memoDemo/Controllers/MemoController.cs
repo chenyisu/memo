@@ -20,13 +20,12 @@ namespace memoDemo.Controllers
         // Memo首頁
         public ActionResult Index()
         {
-
+            // 是否登入
             if (Session["auth"] != null)
             {
                 Uri address = new Uri(_baseAddress, "memo");
                 using (var httpClient = new HttpClient())
                 {
-                    //var response = httpClient.GetAsync(address);
                     var responseTask = httpClient.GetAsync(address);
                     responseTask.Wait();
                     var result = responseTask.Result;
@@ -41,36 +40,74 @@ namespace memoDemo.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+        #region test
+        // 修改 做法1 (get該筆資訊)
+        //public ActionResult editMemo(int id)
+        //{
+        //    // 是否登入
+        //    if (Session["auth"] != null)
+        //    {
+        //        Uri address = new Uri(_baseAddress, "memo/"+id);
+        //        using (var httpClient = new HttpClient())
+        //        {
+        //            var responseTask = httpClient.GetAsync(address);
+        //            // 等待http回傳
+        //            responseTask.Wait();
+        //            var result = responseTask.Result;
+        //            if (result.IsSuccessStatusCode)
+        //            {
+        //                var readTask = result.Content.ReadAsStringAsync();
+        //                memo memo = JsonConvert.DeserializeObject<memo>(readTask.Result);
+        //                readTask.Wait();
+        //                // ViewModel
+        //                MemoViewModel editmemo = new MemoViewModel()
+        //                {
+        //                    title = memo.title,
+        //                    memo_id = id,
+        //                    memo_content = memo.memo_content,
+        //                    update_date = memo.update_date.ToString("yyyy/MM/dd")
+        //                };
+        //                return View(editmemo);
+        //            }
+        //        }
+        //    }
+        //    return RedirectToAction("Index", "Home");
+        //}
+        #endregion
 
-
-
-        //修改
-        public ActionResult editMemo(int id)
+        // 修改 做法2 (傳入該筆資訊)
+        public ActionResult editMemo(memo thisMemo)
         {
-            var memo = db.memo.Where(m => m.memo_id == id).FirstOrDefault();
-            MemoViewModel editmemo = new MemoViewModel()
+            // 是否登入
+            if (Session["auth"] != null)
             {
-                title = memo.title,
-                memo_id = id,
-                memo_content = memo.memo_content,
-                update_date = memo.update_date.ToString("yyyy/MM/dd")
-            };
-            return View(editmemo);
-
+                // ViewModel
+                MemoViewModel editmemo = new MemoViewModel()
+                {
+                    title = thisMemo.title,
+                    memo_id = thisMemo.memo_id,
+                    memo_content = thisMemo.memo_content,
+                    update_date = thisMemo.update_date.ToString("yyyy/MM/dd")
+                };
+                return View(editmemo);
+            }
+            return RedirectToAction("Index", "Home");
         }
+
+
         //修改
         [HttpPost]
         public ActionResult editMemo(MemoViewModel editmemo)
         {
-            var memo = db.memo.Where(m => m.memo_id == editmemo.memo_id).FirstOrDefault();
-            memo.memo_content = editmemo.memo_content;
-            memo.title = editmemo.title;
-            memo.update_date = DateTime.Today;
-            int i = db.SaveChanges();
-            if (i > 0)
-            {
-                TempData["edit"] = true;
-            }
+            //var memo = db.memo.Where(m => m.memo_id == editmemo.memo_id).FirstOrDefault();
+            //memo.memo_content = editmemo.memo_content;
+            //memo.title = editmemo.title;
+            //memo.update_date = DateTime.Today;
+            //int i = db.SaveChanges();
+            //if (i > 0)
+            //{
+            //    TempData["edit"] = true;
+            //}
             return RedirectToAction("Index");
         }
 
