@@ -111,6 +111,8 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MemoController.cs" />
+    <Compile Include="Controllers\NewMemoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -129,13 +131,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>memoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MetaData\userViewModel.cs" />
+    <Compile Include="Models\MetaData\MemoViewModel.cs" />
+    <Compile Include="Models\MetaData\UserViewModel.cs" />
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>memoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\user.cs">
       <DependentUpon>memoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\ListMemoViewModel.cs" />
+    <Compile Include="Models\ViewModel\MemoViewModel.cs" />
     <Compile Include="Models\ViewModel\UserViewModel.cs" />
     <Compile Include="my_application\Resp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -151,6 +156,9 @@
     </None>
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Memo\Index.cshtml" />
+    <Content Include="Views\NewMemo\New.cshtml" />
+    <Content Include="Views\Memo\EditMemo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
