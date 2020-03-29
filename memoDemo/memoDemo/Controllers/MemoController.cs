@@ -7,13 +7,15 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
+using System.Web.Script.Serialization;
+using System.Text;
 
 namespace memoDemo.Controllers
 {
     public class MemoController : Controller
     {
         memoEntities db = new memoEntities();
-        public static readonly Uri _baseAddress = new Uri("http://localhost:9564/api/");
+        public static readonly Uri _baseAddress = new Uri("http://localhost:9564/api/memo");
 
 
 
@@ -23,7 +25,7 @@ namespace memoDemo.Controllers
             // 是否登入
             if (Session["auth"] != null)
             {
-                Uri address = new Uri(_baseAddress, "memo");
+                Uri address = _baseAddress;
                 using (var httpClient = new HttpClient())
                 {
                     var responseTask = httpClient.GetAsync(address);
@@ -99,15 +101,18 @@ namespace memoDemo.Controllers
         [HttpPost]
         public ActionResult editMemo(MemoViewModel editmemo)
         {
-            //var memo = db.memo.Where(m => m.memo_id == editmemo.memo_id).FirstOrDefault();
-            //memo.memo_content = editmemo.memo_content;
-            //memo.title = editmemo.title;
-            //memo.update_date = DateTime.Today;
-            //int i = db.SaveChanges();
-            //if (i > 0)
-            //{
-            //    TempData["edit"] = true;
-            //}
+            string editToString = JsonConvert.SerializeObject(editmemo);
+
+            using (var httpClient = new HttpClient())
+            {
+                // http post
+                var putTask = httpClient.PutAsync(_baseAddress, new StringContent(editToString, Encoding.UTF8, "application/json"));
+                putTask.Wait();
+                if (putTask.Result.IsSuccessStatusCode)
+                {
+                   TempData["edit"] = true;
+                }
+            }
             return RedirectToAction("Index");
         }
 

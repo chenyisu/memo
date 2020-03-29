@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using memoApi.Models;
-using memoApi.my_application;
+using memoApi.Models.ViewModel;
 using Newtonsoft.Json;
 
 namespace memoApi.Controllers
@@ -32,16 +32,27 @@ namespace memoApi.Controllers
         }
 
         // POST: api/memo
-        public void Post([FromBody]string value)
+        public void Post(MemoViewModel editMemo)
         {
-
+            //var toEditMemo = db.memo.Where(m => m.memo_id == editMemo.memo_id).FirstOrDefault();
+            //toEditMemo.memo_content = editMemo.memo_content;
+            //toEditMemo.title = editMemo.title;
+            //toEditMemo.update_date = DateTime.Today;
+            //db.SaveChanges();
         }
 
 
-        // PUT: api/memo/5
-        public void Put(int id, [FromBody]string value)
+        // PUT: api/memo
+        public void Put(MemoViewModel editMemo)
         {
-            
+            if (editMemo != null)
+            {
+                var toEditMemo = db.memo.Where(m => m.memo_id == editMemo.memo_id).FirstOrDefault();
+                toEditMemo.memo_content = editMemo.memo_content;
+                toEditMemo.title = editMemo.title;
+                toEditMemo.update_date = DateTime.Today;
+                db.SaveChanges();
+            }
         }
 
         // DELETE: api/memo/5  刪除該memo

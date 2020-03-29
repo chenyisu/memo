@@ -131,7 +131,7 @@
     <Compile Include="Models\user.cs">
       <DependentUpon>memoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="my_application\Resp.cs" />
+    <Compile Include="Models\ViewModel\MemoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
