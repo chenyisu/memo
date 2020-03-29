@@ -192,8 +192,8 @@
 
                             </td>
                             <td style="width:30%">
-                                @*@Html.ActionLink("編輯", "editMemo", item)*@
-                                @Html.ActionLink("編輯", "editMemo", new { id = item.memo_id })
+                                @Html.ActionLink("編輯", "editMemo", item)  @*傳入該筆*@
+                                @*@Html.ActionLink("編輯", "editMemo", new { id = item.memo_id })*@
                                 @Html.ActionLink("刪除", "deleteMemo", new { id = item.memo_id },new {onclick="return confirm('確定刪除嗎?')" })
                             </td>
                         </tr>
