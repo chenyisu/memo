@@ -103,16 +103,6 @@
     <Content Include="Global.asax" />
     <Content Include="images\banner.jpg" />
     <Content Include="images\register.jpg" />
-    <Content Include="Models\MemoModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MemoModel.edmx</DependentUpon>
-      <LastGenOutput>MemoModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\MemoModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MemoModel.edmx</DependentUpon>
-      <LastGenOutput>MemoModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -124,24 +114,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\memo.cs" />
-    <Compile Include="Models\MemoModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MemoModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MemoModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MemoModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\MetaData\MemoViewModel.cs" />
     <Compile Include="Models\MetaData\UserViewModel.cs" />
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>MemoModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\user.cs">
-      <DependentUpon>MemoModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ViewModel\ListMemoViewModel.cs" />
     <Compile Include="Models\ViewModel\MemoViewModel.cs" />
     <Compile Include="Models\ViewModel\UserViewModel.cs" />
@@ -150,13 +124,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <EntityDeploy Include="Models\MemoModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MemoModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\MemoModel.edmx.diagram">
-      <DependentUpon>MemoModel.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Memo\Index.cshtml" />

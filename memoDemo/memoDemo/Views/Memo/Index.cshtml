@@ -12,6 +12,12 @@
             alert("成功編輯");
         </script>
     }
+    if (TempData["del"] != null)
+    {
+        <script>
+            alert("成功刪除");
+        </script>
+    }
 }
 
 
@@ -57,105 +63,22 @@
         body {
             background-color: rgb(233, 233, 233);
         }
-        /* banner */
-        #banner {
-            height: 18vh;
-            background-image: url('images/banner.jpg');
-            background-size: cover;
-            background-position: center top;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-
-        /* header */
-        #header {
-            opacity: 0.8;
-            background-color: black;
-            height: 100px;
-        }
 
         #title {
             font-size: 32px
         }
 
-        #submenu {
-            background-color: black;
-        }
 
         .divH {
             height: 15vh;
         }
 
-        #row {
-            margin-top: -300px;
-        }
 
-        /* 查詢*/
-        #search {
-            margin-top: -30px;
-            background-color: rgb(214, 214, 214);
-            height: 90px;
-            border-radius: 10px;
-            opacity: 0.9;
-            box-shadow: 3px 3px 3px #333;
-        }
 
-        #search-btn {
-            width: 160px;
-            height: 45px;
-            font-size: 16px;
-            border-radius: 20px;
-            background-color: rgba(12, 55, 134, 0.9);
-            color: white;
-            box-shadow: 3px 3px 3px #333;
-        }
-
-        #rank {
-            /* margin-top: -160px; */
-            /* background-color: rgb(214, 214, 214); */
-            height: 390px;
-            border: 1px solid black;
-            border-radius: 10px;
-            opacity: 0.9;
-            /* box-shadow: 3px 3px 3px #333; */
-        }
-
-        .slick-prev {
-            left: -50px;
-        }
-
-            .slick-prev:before, .slick-next:before {
-                font-size: 50px;
-                color: #8d0404;
-            }
     </style>
 </head>
 <body>
     <div class="row divH mx-0"></div>
-
-    @*<div class="row my-5 mx-0">
-             館藏查詢
-            <div class="col-1"></div>
-            <form class="form-inline col-12" action="SearchResult" method="post">
-                <div class="col-1"></div>
-                <div class="form-group col-3 ">
-                    <select name="key" id="" class="form-control w-100">
-                        <option value="name">書名</option>
-                        <option value="author">作者</option>
-                        <option value="publisher">出版社</option>
-                        <option value="category">分類</option>
-                    </select>
-                </div>
-                <div class="form-group col-4">
-                    <input type="text" class="form-control w-100" placeholder="請輸入關鍵字" name="searchstring" required>
-                </div>
-                <div class=" form-group col-3 ml-3">
-                    <input type="submit" class="btn btn-lg" id="search-btn" value="尋找書籍">
-                </div>
-                <p class="offset-4">@Html.ValidationMessageFor(model => model.searchstring, "", new { @class = "text-danger ml-4" })</p>
-
-            </form>
-        </div>*@
 
 
     <div class="col-11 mx-5 mb-5 mt-0" id="resultList">

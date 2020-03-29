@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Net.Http;
+using System.Text;
 using System.Web.Mvc;
-using memoDemo.Models;
 using memoDemo.Models.ViewModel;
+using Newtonsoft.Json;
 
 namespace memoDemo.Controllers
 {
 
     public class NewMemoController : Controller
     {
-        memoEntities db = new memoEntities();
-        DateTime today = DateTime.Today;
+        public static readonly Uri _baseAddress = new Uri("http://localhost:9564/api/memo");
 
-
-        // NewMemo
+        // NewMemo 頁面
         public ActionResult New()
         {
             if (Session["auth"] != null)
@@ -34,23 +31,18 @@ namespace memoDemo.Controllers
             {
                 return View("New", memo);
             }
-
-            memo thisMemo = new memo()
+            string memoToString = JsonConvert.SerializeObject(memo);
+            using(var httpClient = new HttpClient())
             {
-                title = memo.title,
-                memo_content = memo.memo_content,
-                update_date = today,
-                create_date = today,
-                enable=1
-            };
-            db.memo.Add(thisMemo);
-            int result = db.SaveChanges();
-            if (result > 0)
-            {
-                TempData["msg"] = true;
+                // http post
+                var postTask = httpClient.PostAsync(_baseAddress, new StringContent(memoToString, Encoding.UTF8, "application/json"));
+                postTask.Wait();
+                if (postTask.Result.IsSuccessStatusCode)
+                {
+                    TempData["edit"] = true;
+                }
             }
             return RedirectToAction("Index", "Memo");
-
         }
     }
 }

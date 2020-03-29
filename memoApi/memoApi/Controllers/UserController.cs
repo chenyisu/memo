@@ -13,6 +13,7 @@ namespace memoApi.Controllers
     public class UserController : ApiController
     {
         memoEntities db = new memoEntities();
+
         // POST: api/User
         public IHttpActionResult Post(UserViewModel fUser)
         {
